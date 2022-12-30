@@ -123,6 +123,13 @@ def detect(save_img=False):
                             f.write(('%g ' * len(line)).rstrip() % line + '\n')
 
                     if save_img or view_img:  # Add bbox to image
+                        
+                        
+                        """
+                        Cropping the detected bbox
+                        """
+                        
+                        
                         label = f'{names[int(cls)]} {conf:.2f}'
                         x1 = int(xyxy[0].item())
                         y1 = int(xyxy[1].item())
@@ -131,11 +138,18 @@ def detect(save_img=False):
                         
                         object_name = names[int(cls)]
                         cropped_img = im0[y1:y2, x1:x2]
+                        
 
                         print('detected object name is ', object_name)
                         #frame = cv2.rectangle(frame, (x1, y1), (x2, y2), (255,0,0), 2) # box
                         #frame = cv2.putText(frame, names[c], (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2, cv2.LINE_AA) # object name
                         
+                        
+                        """
+                        Finding the most dominant color of cropped image
+                        """
+                        
+                       
                         def findbgr():
                             
                             height, width, _ = np.shape(cropped_img)
